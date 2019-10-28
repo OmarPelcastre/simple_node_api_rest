@@ -14,6 +14,17 @@ app.listen(HTTP_PORT, () => {
     console.log("Server running on port %PORT%".replace("%PORT%",HTTP_PORT))
 });
 
+
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE, PATCH');
+    res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE, PATCH');
+ 
+    next();
+});
+
+
 app.get("/api/users", (req, res, next) => {
     var sql = "select * from user"
     var params = []
